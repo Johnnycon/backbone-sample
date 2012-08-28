@@ -20,8 +20,10 @@ $(function( $ ){
       votes: 0,
       content: ''
     }
+  });
 
-
+  app.QuestionList = Backbone.Collection.extend({
+    model: app.Question
   });
 
 });
@@ -75,6 +77,9 @@ $(function( $ ) {
       console.log('in AppView initialize');
       this.$footer = this.$("footer");
       this.$ask = this.$("#ask-input");
+      this.collection = new app.QuestionList();
+      //this.collection.bind('add', this.appendItem, this); 
+
       this.render();
     },
 
@@ -94,6 +99,13 @@ $(function( $ ) {
       this.$ask.val('').focus();
     }
 
+    //appendItem: function(item){
+      //var itemView = new ItemView({
+        //model: item
+      //});
+      //$('ul', this.el).append(itemView.render().el);
+    //}    
+
 
   });
 
@@ -109,10 +121,5 @@ $(function( $ ) {
 // initialize application
 // ***************************//
 $(function() {
-  me = new app.AppView();
+ new app.AppView();
 });
-  
-
-
-
-var me = {};
