@@ -1,0 +1,54 @@
+
+* { box-sizing: border-box; margin:0; }
+
+#wrap {
+  margin:auto;
+  width:800px;
+  border: 1px solid #e4e4e4;
+  padding: 30px;
+}
+
+#question-panel>footer:after,#question-panel>footer,
+#question-panel:after, #question-panel:before {
+  content:"";
+  display:table;
+  clear:both
+}
+
+#question-panel > div {
+  padding: 20px;
+  width: 50%;
+  float:left;
+}
+input[type='text'], input[type='password']
+{
+  color:red; 
+  width:100%;
+}
+button {
+  padding: 10px;
+  margin:6px;
+}
+
+h3 { margin: 20px; }
+
+#question-panel footer {
+  width:100%;
+  padding:20px;
+}
+
+.question {
+  background-color: #e4e4e4;
+  padding:10px;
+  margin: 6px;
+  -webkit-border-radius: 5px;
+  clear:both;
+}
+.question .upvote, .question .votes {
+  float:right;
+}
+.question:after,.question.before{
+  content:"";
+  display:table;
+  clear:both;
+}
