@@ -7,20 +7,21 @@ $(function($){
   'use strict';
 
   jit.view.Question = Backbone.View.extend({ 
-    tagName: 'div',
+    //tagName: 'div',
     className: 'question',
-    template: $('#question-template'),
+    template: $('#question-template').html(),
     events: {
       'click .upvote': 'upvote'
     },
-    initialize: function(options){
-      //this.broker = options.broker;
-      this.bind('any', function(){ console.log('any') });
+    initialize: function(){
       this.render();
     },
     render: function(){
-      $(this.el).html(Mustache.to_html(this.template, this.model.toJSON()));
+      var html = Mustache.to_html(this.template, this.model.toJSON());
+      this.$el.html( html );
+
       return this;
+
     },
     upvote: function(){
 

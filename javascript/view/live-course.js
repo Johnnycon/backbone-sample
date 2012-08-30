@@ -10,19 +10,21 @@ $(function( $ ){
     events: {
       'click #ask-button': 'addQuestion'
     },
-    initialize: function(){
+    initialize: function( options ){
+      broker = options.broker;
       this.$ask = this.$('#ask-input');
     },
 
     addQuestion: function(e){
       e.preventDefault();
-      console.log('question added');
 
       var question = new jit.model.Question({
-        content: this.$ask.val() 
+        question : this.$ask.val() 
       });
 
-      this.$el.append( new jit.view.Question({ model: question }).el );
+      broker.trigger(jit.app.LivePageEvents.QuestionAdded, question);
+
+      //this.$el.append( new jit.view.Question({ model: question }).el );
       this.$ask.val('').focus();
     }
   });

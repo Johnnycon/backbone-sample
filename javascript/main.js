@@ -24,5 +24,6 @@ $(function(){
   jit.app.broker = jit.app.broker || {};
   _.extend(jit.app.broker, Backbone.Events);
 
-  new jit.view.LiveCourse();
+  new jit.view.LiveCourse({ broker: jit.app.broker });
+  new jit.view.QuestionList({ broker: jit.app.broker });
 });
