@@ -23,8 +23,11 @@ $(function($){
       return this;
 
     },
-    upvote: function(){
+    upvote: function( e ){
+      e.preventDefault();
 
+      this.model.set('votes', this.model.get('votes') + 1);
+      $('.votes', this.el).html( this.model.get('votes') );
     }
   });
 });
