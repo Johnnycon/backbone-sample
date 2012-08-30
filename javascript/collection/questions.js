@@ -7,7 +7,10 @@ $(function($){
   'use strict';
 
   jit.collection.Questions = Backbone.Collection.extend({ 
-    model: jit.model.Question
+    model: jit.model.Question,
+    comparator: function( model ){
+      return -model.get('votes');
+    }
   });
 
 });

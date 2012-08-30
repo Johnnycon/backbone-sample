@@ -20,6 +20,8 @@ $(function($){
       var html = Mustache.to_html(this.template, this.model.toJSON());
       this.$el.html( html );
 
+      console.log('quesiton render');
+
       return this;
 
     },

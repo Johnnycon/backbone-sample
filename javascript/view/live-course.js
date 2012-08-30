@@ -8,7 +8,8 @@ $(function( $ ){
   jit.view.LiveCourse = Backbone.View.extend({ 
     el: 'body',
     events: {
-      'click #ask-button': 'addQuestion'
+      'click #ask-button': 'addQuestion',
+      'click #resort-button': 'reSortQuestions'
     },
     initialize: function( options ){
       broker = options.broker;
@@ -24,8 +25,10 @@ $(function( $ ){
 
       broker.trigger(jit.app.LivePageEvents.QuestionAdded, question);
 
-      //this.$el.append( new jit.view.Question({ model: question }).el );
       this.$ask.val('').focus();
+    },
+    reSortQuestions: function(){
+      broker.trigger(jit.app.LivePageEvents.ReSortQuestions, 'nada');
     }
   });
 
