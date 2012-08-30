@@ -14,14 +14,14 @@
       <div id="wrap">
 
         <div id="question-panel">
+
           <div>
             <h3>Enter your question</h3>
             <form action="" method="get" accept-charset="utf-8">
               <label for="ask-input">Question: </label>
               <input type="text" id="ask-input" name="ask-input" />
-              <button type="submit" id="ask">Ask</button>
+              <button type="submit" id="ask-button">Ask</button>
             </form>
-
           </div>
 
           <div>
@@ -31,24 +31,22 @@
             </div>
           </div>
 
-          <footer>
+          <footer id="question-footer">
           </footer>
-        </div>
 
+        </div>
 
       </div>
 
 
 
      <script type="text/mustache-template" id="question-template">
-       <div class="question">
-          {{content}}
-          <div class="votes">{{votes}}</div>
-          <button class="upvote">vote</div>
-       </div>
+        {{content}}
+        <div class="votes">{{votes}}</div>
+        <button class="upvote">vote</div>
      </script>
 
-     <script type="text/mustache-template" id="footer-template">
+     <script type="text/mustache-template" id="question-footer-template">
        Total questions asked is {{totalQuestions}}
      </script>
 
@@ -58,7 +56,8 @@
       <script src="lib/underscore.js"></script>
       <script src="lib/backbone.js"></script> 
       <script src="lib/mustache.js"></script>
-      <script src="javascript/app.js"></script>
+      <script src="javascript/mediator.js"></script>
+      <script src="javascript/main.js"></script>
 
     </body>
 

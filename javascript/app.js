@@ -5,7 +5,11 @@
 // routers
 // app
 
-var app = app || {};
+var jit = jit || {};
+jit.model = jit.model || {};
+jit.collection = jit.collection || {};
+jit.view = jit.view || {};
+
 var ENTER_KEY = 13;
 
 // ***************************//
@@ -15,15 +19,15 @@ var ENTER_KEY = 13;
 $(function( $ ){
   'use strict';
 
-  app.Question = Backbone.Model.extend({
+  jit.model.Question = Backbone.Model.extend({
     defaults: {
       votes: 0,
       content: ''
     }
   });
 
-  app.QuestionList = Backbone.Collection.extend({
-    model: app.Question
+  jit.collection.Questions = Backbone.Collection.extend({
+    model: jit.model.Question
   });
 
 });
@@ -37,7 +41,7 @@ $(function( $ ){
 $(function( $ ) {
   'use strict';
 
-  app.QuestionView = Backbone.View.extend({
+  jit.view.Question = Backbone.View.extend({
     //el: '#question-list',
     tagName: 'div',
     template: $("#question-template").html(),
@@ -65,8 +69,7 @@ $(function( $ ) {
 
   });
 
-  
-  app.AppView = Backbone.View.extend({
+  jit.view.App = Backbone.View.extend({
     el: '#question-panel',
     template: $('#footer-template').html(),
     events: {
@@ -77,8 +80,8 @@ $(function( $ ) {
       console.log('in AppView initialize');
       this.$footer = this.$("footer");
       this.$ask = this.$("#ask-input");
-      this.collection = new app.QuestionList();
-      //this.collection.bind('add', this.appendItem, this); 
+      this.collection = new jit.collection.Questions();
+      this.collection.bind('add', this.appendItem, this); 
 
       this.render();
     },
@@ -86,6 +89,8 @@ $(function( $ ) {
     render: function(){
       console.log('in AppView render');
       this.$footer.html(Mustache.to_html(this.template,{}));
+
+      console.log('AppView render');
     },
 
     addQuestion: function(e) {
@@ -93,18 +98,21 @@ $(function( $ ) {
       console.log('in AppView addQuestion');
       console.log( this.$ask.val() );
       // add view
-      var questionModel = new app.Question({ content: this.$ask.val() });
-      var view = new app.QuestionView({ model: questionModel });
+      var questionModel = new jit.model.Question({ content: this.$ask.val() });
+      this.collection.add({ model: questionModel });
+
+      var view = new jit.view.Question({ model: questionModel });
       this.$("#question-list").append(view.el);
       this.$ask.val('').focus();
-    }
+    },
 
-    //appendItem: function(item){
+    appendItem: function(question){
+      console.log('in AppView appendItem');
       //var itemView = new ItemView({
-        //model: item
+      //  model: item
       //});
       //$('ul', this.el).append(itemView.render().el);
-    //}    
+    }    
 
 
   });
@@ -121,5 +129,5 @@ $(function( $ ) {
 // initialize application
 // ***************************//
 $(function() {
- new app.AppView();
+ new jit.view.App();
 });
