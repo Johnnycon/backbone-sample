@@ -29,7 +29,9 @@ $(function($){
       e.preventDefault();
 
       this.model.set('votes', this.model.get('votes') + 1);
-      $('.votes', this.el).html( this.model.get('votes') );
+      //$('.votes', this.el).html( this.model.get('votes') );
+
+      jit.app.broker.trigger(jit.app.LivePageEvents.ReSortQuestions, 'nada');
     }
   });
 });
