@@ -1,72 +1,37 @@
-
-
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-    <title>backbone example</title>
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-      <link rel="stylesheet" type="text/css" href="css/style.css" />
-    </head>
-
-    <body>
-
-      <div id="wrap">
-
-        <div id="question-panel">
-
-          <div>
-            <h3>Enter your question</h3>
-            <form action="" method="get" accept-charset="utf-8">
-              <label for="ask-input">Question: </label>
-              <input type="text" id="ask-input" name="ask-input" />
-              <button type="submit" id="ask-button">Ask</button>
-            </form>
-            <button type="submit" id="resort-button">Manual ReSort</button>
-          </div>
-
-          <div>
-            <h3>Pending Questions</h3>
-            <div id="question-list">
-
-            </div>
-          </div>
-
-          <footer id="question-footer">
-          </footer>
-
-        </div>
-
-      </div>
-
-
-
-     <script type="text/mustache-template" id="question-template">
-       <div>
-          {{question}}
-          <div class="votes">{{votes}}</div>
-          <button class="upvote">vote</div>
-       </div>
-     </script>
-
-     <script type="text/mustache-template" id="question-footer-template">
-       Total questions asked is {{totalQuestions}}
-     </script>
-
-
-
-      <script src="lib/jquery.js"></script>
-      <script src="lib/underscore.js"></script>
-      <script src="lib/backbone.js"></script> 
-      <script src="lib/mustache.js"></script>
-
-      <script src="javascript/model/question.js"></script>
-      <script src="javascript/collection/questions.js"></script>
-      <script src="javascript/view/question.js"></script>
-      <script src="javascript/view/question-list.js"></script>
-      <script src="javascript/view/live-course.js"></script>
-      <script src="javascript/main.js"></script>
-
-    </body>
-
+<html ng-app="app">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>angular example</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="lib/angular.js"></script>
+		<script src="javascript/app.js"></script>
+	</head>
+	<body>
+		<div id="wrap" ng-controller="QuestionsCntl">
+			<div id="question-panel">
+				<div>
+					<h3>Enter your question</h3>
+					<form ng-submit="ask(question); question=''">
+						<label for="ask-input">Question:</label>
+						<input type="text" id="ask-input" ng-model="question" autofocus />
+						<button>Ask</button>
+					</form>
+					<button type="submit" id="resort-button">Manual ReSort</button>
+				</div>
+				<div>
+					<h3>Pending Questions</h3>
+					<div id="question-list">
+						<form ng-repeat="question in questions | orderBy:'votes':true" ng-submit="upvote(question.id)" class="question">
+							{{question.question}}
+							<div class="votes">{{question.votes}}</div>
+							<button class="upvote">vote</div>
+						</form>
+					</div>
+				</div>
+				<footer id="question-footer">
+					Total questions asked is {{questions.length}}
+				</footer>
+			</div>
+		</div>
+	</body>
 </html>
